@@ -1,6 +1,5 @@
-package com.Toyota.BackendProject.dto;
+package com.Toyota.BackendProject.dto.request;
 
-import com.Toyota.BackendProject.Entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,4 +18,6 @@ public class RegisterDto {
     private String password;
 
     private List<Long> role_id;
+
+
 }

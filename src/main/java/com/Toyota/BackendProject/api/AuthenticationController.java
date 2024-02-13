@@ -1,9 +1,9 @@
 package com.Toyota.BackendProject.api;
 
 
-import com.Toyota.BackendProject.dto.LoginDto;
-import com.Toyota.BackendProject.dto.RegisterDto;
-import com.Toyota.BackendProject.dto.UserResponse;
+import com.Toyota.BackendProject.dto.request.LoginDto;
+import com.Toyota.BackendProject.dto.request.RegisterDto;
+import com.Toyota.BackendProject.dto.response.UserResponse;
 import com.Toyota.BackendProject.service.Abstract.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

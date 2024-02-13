@@ -1,4 +1,4 @@
-package com.Toyota.BackendProject.dto;
+package com.Toyota.BackendProject.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,9 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserResponse {
-    private String token;
+@Builder
+public class LoginDto {
+    private String username;
+
+    private String password;
 }

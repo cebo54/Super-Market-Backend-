@@ -4,9 +4,9 @@ import com.Toyota.BackendProject.Dao.RoleRepository;
 import com.Toyota.BackendProject.Dao.UserRepository;
 import com.Toyota.BackendProject.Entity.Role;
 import com.Toyota.BackendProject.Entity.User;
-import com.Toyota.BackendProject.dto.LoginDto;
-import com.Toyota.BackendProject.dto.RegisterDto;
-import com.Toyota.BackendProject.dto.UserResponse;
+import com.Toyota.BackendProject.dto.request.LoginDto;
+import com.Toyota.BackendProject.dto.request.RegisterDto;
+import com.Toyota.BackendProject.dto.response.UserResponse;
 import com.Toyota.BackendProject.security.JwtService;
 import com.Toyota.BackendProject.service.Abstract.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
