@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
@@ -22,8 +23,9 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
+    Logger logger = Logger.getLogger(JwtAuthenticationFilter.class);
 
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -32,8 +34,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String username;
 
         //istekler authorization bearer baslıgıyla gelir
-        if(header==null || header.startsWith("Bearer")){
+        if(header==null || !header.startsWith("Bearer")){
             filterChain.doFilter(request,response);
+            logger.info("bearer null");
             return;
         }
 
@@ -47,6 +50,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            }
+            else{
+                logger.info("auth failed");
             }
         }
         filterChain.doFilter(request,response);

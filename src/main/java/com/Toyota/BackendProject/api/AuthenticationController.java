@@ -19,11 +19,7 @@ public class AuthenticationController {
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
-    @PostMapping("/save")
-    public ResponseEntity<UserResponse>save(@RequestBody RegisterDto registerDto){
-        return ResponseEntity.ok(authenticationService.save(registerDto));
 
-    }
     @PostMapping("/login")
     public ResponseEntity<UserResponse>login(@RequestBody LoginDto loginDto){
         return ResponseEntity.ok(authenticationService.login(loginDto));

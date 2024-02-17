@@ -24,29 +24,10 @@ import java.util.stream.Collectors;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
 
     private final JwtService jwtService;
-    private final PasswordEncoder passwordEncoder;
+
     private final AuthenticationManager authenticationManager;
-    public UserResponse save(RegisterDto registerDto) {
-        List <Role> roles = registerDto.getRole_id().stream().map(roleRepository::findById)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList());
-        User user= User.builder().e_mail(registerDto.getE_mail())
-                .name(registerDto.getName())
-                .username(registerDto.getUsername())
-                .password(passwordEncoder.encode(registerDto.getPassword()))
-                .roles(roles).build();
-
-        userRepository.save(user);
-
-        var token=jwtService.generateToken(user);
-
-        return UserResponse.builder().token(token).build();
-
-    }
 
     @Override
     public UserResponse login(LoginDto loginDto) {

@@ -24,16 +24,16 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="e_mail",nullable = false,length = 40,unique = true)
-    private String e_mail;
+    @Column(name="email",nullable = false,length = 40,unique = true)
+    private String email;
     @Column(name="name",nullable = false,length = 25,unique = false)
     private String name;
-    @Column(name="user_name",nullable = false,length = 50,unique = true)
+    @Column(name="username",nullable = false,length = 50,unique = true)
     private String username;
     @Column(name="password",nullable = false,length = 100,unique = false)
     private String password;
-    @Column(name="isActive")
-    private boolean is_active;
+    @Column(name="is_Active")
+    private boolean isActive;
 
     @ManyToMany(cascade = CascadeType.ALL
             , fetch = FetchType.EAGER)
@@ -70,6 +70,7 @@ public class User implements UserDetails {
     //kullanıcı aktif mi pasif mi
     @Override
     public boolean isEnabled() {
-        return true;
+
+        return isActive;
     }
 }

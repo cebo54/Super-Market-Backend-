@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SaleController {
     private final SaleService saleService;
 
-    @PostMapping
+    @PostMapping("/makesale")
     public ResponseEntity<Object>sale(@RequestBody SaleRequest saleRequest){
         try {
             SaleResponse saleResponse = saleService.sale(saleRequest);

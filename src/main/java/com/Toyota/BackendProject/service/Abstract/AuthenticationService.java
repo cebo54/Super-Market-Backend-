@@ -5,7 +5,6 @@ import com.Toyota.BackendProject.dto.request.RegisterDto;
 import com.Toyota.BackendProject.dto.response.UserResponse;
 
 public interface AuthenticationService {
-    UserResponse save(RegisterDto registerDto);
 
     UserResponse login(LoginDto loginDto);
 }
