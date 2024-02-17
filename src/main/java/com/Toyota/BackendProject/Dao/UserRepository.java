@@ -16,9 +16,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     Page<User> findByIsActive(Boolean isActive, Pageable pageable);
 
-    @Query("select t from User t where t.isActive=:isActive and t.name=:filter")
+    @Query("select t from User t where t.isActive = :isActive and t.name like %:filter%")
     Page<User> findByIsActiveWithFilter(@Param("isActive") Boolean isActive, Pageable pageable, @Param("filter") String filter);
 
-    @Query("select t from User t where t.name=:filter")
-    Page<User> findAllWithFilter(Pageable pageable,@Param("filter") String filter);
 }

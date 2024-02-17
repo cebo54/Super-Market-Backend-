@@ -60,25 +60,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public List<UserViewRequest> getUsers(Integer isActive ,Integer page , Integer size,String sortBy,String filter) {
+
         Pageable pageable= PageRequest.of(page,size,Sort.by(sortBy));
-        if(isActive==1){
-            if(Objects.equals(filter, "")){
-                return userRepository.findByIsActive(true,pageable).stream().map(UserViewRequest::convert).collect(Collectors.toList());
-            }
-            return userRepository.findByIsActiveWithFilter(true,pageable,filter).stream().map(UserViewRequest::convert).collect(Collectors.toList());
-        }
-        else if(isActive==0){
-            if(Objects.equals(filter, "")){
-                return userRepository.findByIsActive(false,pageable).stream().map(UserViewRequest::convert).collect(Collectors.toList());
-            }
-            return userRepository.findByIsActiveWithFilter(false,pageable,filter).stream().map(UserViewRequest::convert).collect(Collectors.toList());
-        }
-        if (Objects.equals(filter, "")){
-            return UserViewRequest.convertUserListToUserViewResponse(userRepository.findAll(pageable));
-        }
-        return UserViewRequest.convertUserListToUserViewResponse(userRepository.findAllWithFilter(pageable,filter));
+        Boolean[] bools = {false, true};
+        boolean isActiveStatus = bools[isActive];
+        Page<User> finalRequest;
+        if (filter.isEmpty()){finalRequest = userRepository.findByIsActive(isActiveStatus,pageable);}
+        else {finalRequest = userRepository.findByIsActiveWithFilter(isActiveStatus,pageable,filter);}
+        return UserViewRequest.convertUserListToUserViewResponse(finalRequest);
     }
 
 
