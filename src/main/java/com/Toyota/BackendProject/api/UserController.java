@@ -1,5 +1,6 @@
 package com.Toyota.BackendProject.api;
 
+import com.Toyota.BackendProject.Util.GenericResponse;
 import com.Toyota.BackendProject.dto.request.RegisterDto;
 import com.Toyota.BackendProject.dto.request.UserUpdateDto;
 import com.Toyota.BackendProject.dto.request.UserViewDto;
@@ -7,7 +8,6 @@ import com.Toyota.BackendProject.dto.request.UserViewRequest;
 import com.Toyota.BackendProject.dto.response.UserResponse;
 import com.Toyota.BackendProject.service.Abstract.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,49 +22,61 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/getUsers")
-    public ResponseEntity<List<UserViewRequest>>getUsers(@RequestParam(defaultValue = "2",required = false)Integer isActive,
-                                                         @RequestParam(defaultValue = "0",name = "page")Integer page,
-                                                         @RequestParam(defaultValue = "0",name = "size") Integer size,
-                                                         @RequestParam(defaultValue = "id",name = "sortBy")String sortBy,
-                                                         @RequestParam(defaultValue = "",name = "filter")String filter)
+    public GenericResponse<List<UserViewRequest>> getUsers(@RequestParam(defaultValue = "2",required = false)Integer isActive,
+                                                           @RequestParam(defaultValue = "0",name = "page")Integer page,
+                                                           @RequestParam(defaultValue = "0",name = "size") Integer size,
+                                                           @RequestParam(defaultValue = "id",name = "sortBy")String sortBy,
+                                                           @RequestParam(defaultValue = "",name = "filter")String filter)
     {
          List<UserViewRequest>users;
-           users=userService.getUsers(isActive,page,size,sortBy,filter);
+         users=userService.getUsers(isActive,page,size,sortBy,filter);
 
-        return ResponseEntity.ok(users);
+        return GenericResponse.successResult(users,"success.message.successful");
     }
 
     @PostMapping("/save")
-    public ResponseEntity<UserResponse> save(@RequestBody RegisterDto registerDto){
+    public GenericResponse<UserResponse> save(@RequestBody RegisterDto registerDto){
 
-        return ResponseEntity.ok(userService.save(registerDto));
+        return GenericResponse.successResult(userService.save(registerDto),"success.message.dataSaved");
 
 
     }
-    @PostMapping("/update/{id}")
-    public ResponseEntity<UserViewDto>updateUser(@PathVariable Long id , @RequestBody UserUpdateDto userUpdateDto){
-        final UserViewDto user=userService.updateUser(id,userUpdateDto);
-        return ResponseEntity.ok(user);
+    @PutMapping("/update/{id}")
+    public GenericResponse<UserViewDto>updateUser(@PathVariable Long id , @RequestBody UserUpdateDto userUpdateDto){
+        try {
+            final UserViewDto user = userService.updateUser(id, userUpdateDto);
+            return GenericResponse.successResult(user, "success.message.dataUpdate");
+        }catch (RuntimeException e){
+            return GenericResponse.errorResult(e.getMessage());
+        }
     }
     @PostMapping("/changeStatus/{id}")
-    public ResponseEntity<?>changeStatus(@PathVariable Long id){
+    public GenericResponse<?>changeStatus(@PathVariable Long id){
         try {
             userService.changeStatus(id);
-            return ResponseEntity.ok("Status changed succesfully");
+            return GenericResponse.success("success.message.status");
         }catch (RuntimeException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return GenericResponse.errorResult(e.getMessage());
         }
     }
 
     @PostMapping("/roles/{id}")
-    public ResponseEntity<?>addRole(@PathVariable Long id ,@RequestParam String roleName){
-        userService.addRole(id,roleName);
-        return ResponseEntity.ok("Role added succesfully");
+    public GenericResponse<?>addRole(@PathVariable Long id ,@RequestParam String roleName){
+        try {
+            userService.addRole(id, roleName);
+            return GenericResponse.success("success.message.roleAdd");
+        }catch(RuntimeException e){
+            return GenericResponse.errorResult(e.getMessage());
+        }
     }
     @DeleteMapping("/roles/{id}")
-    public ResponseEntity<?>removeRole(@PathVariable Long id,@RequestParam String roleName){
-        userService.removeRole(id,roleName);
-        return ResponseEntity.ok("Role deleted succesfully");
+    public GenericResponse<?>removeRole(@PathVariable Long id,@RequestParam String roleName){
+        try {
+            userService.removeRole(id, roleName);
+            return GenericResponse.success("success.message.roleDel");
+        }catch (RuntimeException e){
+            return GenericResponse.errorResult(e.getMessage());
+        }
     }
 
 

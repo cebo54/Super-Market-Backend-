@@ -1,5 +1,6 @@
 package com.Toyota.BackendProject.api;
 
+import com.Toyota.BackendProject.Util.GenericResponse;
 import com.Toyota.BackendProject.dto.response.CategoryResponse;
 import com.Toyota.BackendProject.service.Abstract.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -18,14 +19,18 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping("/getAllCategories")
-    public List<CategoryResponse> getAllCategories(){
-        return categoryService.getAllCategories();
+    public GenericResponse<List<CategoryResponse>> getAllCategories(){
+
+        return GenericResponse.successResult(categoryService.getAllCategories(),"success.message.successful");
     }
 
     @GetMapping("/getOneCategory/{id}")
-    public CategoryResponse getOneCategory(@PathVariable Long id){
-
-        return categoryService.getOneCategory(id);
+    public GenericResponse<CategoryResponse> getOneCategory(@PathVariable Long id){
+        try {
+            return GenericResponse.successResult(categoryService.getOneCategory(id), "success.message.successful");
+        }catch (RuntimeException e){
+            return GenericResponse.errorResult(e.getMessage());
+        }
     }
 
 

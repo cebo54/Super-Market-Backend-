@@ -1,11 +1,10 @@
 package com.Toyota.BackendProject.api;
 
+import com.Toyota.BackendProject.Util.GenericResponse;
 import com.Toyota.BackendProject.dto.request.SaleRequest;
 import com.Toyota.BackendProject.dto.response.SaleResponse;
 import com.Toyota.BackendProject.service.Abstract.SaleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,12 +17,12 @@ public class SaleController {
     private final SaleService saleService;
 
     @PostMapping("/makesale")
-    public ResponseEntity<Object>sale(@RequestBody SaleRequest saleRequest){
+    public GenericResponse<Object> sale(@RequestBody SaleRequest saleRequest){
         try {
             SaleResponse saleResponse = saleService.sale(saleRequest);
-            return ResponseEntity.ok(saleResponse);
+            return GenericResponse.successResult(saleResponse,"success.message.successful");
         }catch (RuntimeException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return GenericResponse.errorResult(e.getMessage());
         }
     }
 }

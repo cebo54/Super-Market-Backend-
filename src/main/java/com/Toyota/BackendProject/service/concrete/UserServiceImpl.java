@@ -19,11 +19,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+
+
 import java.util.List;
-import java.util.Objects;
+
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         var token=jwtService.generateToken(user);
-        logger.info(String.format("Registered succesfully"));
+        logger.info(String.format("Registered successfully"));
 
         return UserResponse.builder().token(token).build();
     }
@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
         user.setUsername(userUpdateDto.getUsername());
         user.setPassword(userUpdateDto.getPassword());
         final User updatedUser=userRepository.save(user);
-        logger.info("User updated succesfully");
+        logger.info("User updated successfully");
         return UserViewDto.convert(updatedUser);
     }
 

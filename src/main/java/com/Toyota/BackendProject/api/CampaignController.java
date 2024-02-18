@@ -1,5 +1,6 @@
 package com.Toyota.BackendProject.api;
 
+import com.Toyota.BackendProject.Util.GenericResponse;
 import com.Toyota.BackendProject.dto.response.CampaignResponse;
 import com.Toyota.BackendProject.service.Abstract.CampaignService;
 import lombok.RequiredArgsConstructor;
@@ -17,12 +18,13 @@ public class CampaignController {
     private final CampaignService campaignService;
 
     @GetMapping("/getAllCampaigns")
-    public List<CampaignResponse> getAllCampaigns(){
+    public GenericResponse<List<CampaignResponse>> getAllCampaigns(){
 
-        return campaignService.getAllCampaigns();
+        return GenericResponse.successResult(campaignService.getAllCampaigns(),"success.message.successful");
     }
-    @GetMapping("/getOneCamaign/{id}")
-    public CampaignResponse getOneCampaign(@PathVariable Long id){
-        return campaignService.getOneCampaign(id);
+    @GetMapping("/getOneCampaign/{id}")
+    public GenericResponse<CampaignResponse> getOneCampaign(@PathVariable Long id){
+
+        return GenericResponse.successResult(campaignService.getOneCampaign(id),"success.message.successful");
     }
 }

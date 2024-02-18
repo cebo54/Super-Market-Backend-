@@ -19,7 +19,6 @@ public class UserViewRequest {
     private String email;
     private String name;
     private String username;
-
     private Boolean isActive;
 
     public static UserViewRequest convert(User user){

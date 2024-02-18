@@ -1,6 +1,7 @@
 package com.Toyota.BackendProject.api;
 
 
+import com.Toyota.BackendProject.Util.GenericResponse;
 import com.Toyota.BackendProject.dto.request.LoginDto;
 import com.Toyota.BackendProject.dto.request.RegisterDto;
 import com.Toyota.BackendProject.dto.response.UserResponse;
@@ -21,8 +22,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserResponse>login(@RequestBody LoginDto loginDto){
-        return ResponseEntity.ok(authenticationService.login(loginDto));
+    public GenericResponse<UserResponse> login(@RequestBody LoginDto loginDto){
+        return GenericResponse.successResult(authenticationService.login(loginDto),"success.message.successful");
 
     }
 
