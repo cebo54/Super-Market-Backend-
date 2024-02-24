@@ -43,6 +43,8 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<SoldProduct> SoldProducts;
 
+
+
     public void setImgProp(byte[] img){
         this.img=img;
     }

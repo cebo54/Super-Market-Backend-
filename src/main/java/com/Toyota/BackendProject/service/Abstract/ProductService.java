@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<ProductResponse> getAllProducts(Pageable pageable);
+    List<ProductResponse> getAllProducts(Integer page,Integer size,String sortBy,String filter);
 
     ProductResponse getOneProduct(Long id);
 

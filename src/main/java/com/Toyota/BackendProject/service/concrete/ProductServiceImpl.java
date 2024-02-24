@@ -5,7 +5,9 @@ import com.Toyota.BackendProject.Entity.Product;
 import com.Toyota.BackendProject.dto.response.ProductResponse;
 import com.Toyota.BackendProject.service.Abstract.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +18,9 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     @Override
-    public List<ProductResponse> getAllProducts(Pageable pageable) {
-
-        return productRepository.findAll(pageable).stream().map(ProductResponse::convert).collect(Collectors.toList());
+    public List<ProductResponse> getAllProducts(Integer page,Integer size,String sortBy,String filter) {
+        Pageable pageable= PageRequest.of(page,size, Sort.by(sortBy));
+        return productRepository.findAll(pageable,filter).stream().map(ProductResponse::convert).collect(Collectors.toList());
     }
     @Override
     public ProductResponse getOneProduct(Long id) {
