@@ -42,6 +42,8 @@ public class SecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFil
                 .hasRole("CASHIER")
                 .antMatchers("/user/**")
                 .hasRole("ADMIN")
+                .antMatchers("/report/**")
+                .hasRole("STOREMANAGER")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
