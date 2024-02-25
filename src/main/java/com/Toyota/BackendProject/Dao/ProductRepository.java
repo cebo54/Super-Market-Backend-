@@ -10,8 +10,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product,Long> {
-
-    Page<Product> findAll(Pageable pageable,String filter);
+    @Query("select t from Product t where t.name like %:filter%")
+    Page<Product> findAllWithFilter(Pageable pageable,@Param("filter") String filter);
 
     List<Product>findAllByCategoryId(Long id);
 

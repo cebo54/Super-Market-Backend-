@@ -20,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductResponse> getAllProducts(Integer page,Integer size,String sortBy,String filter) {
         Pageable pageable= PageRequest.of(page,size, Sort.by(sortBy));
-        return productRepository.findAll(pageable,filter).stream().map(ProductResponse::convert).collect(Collectors.toList());
+        return productRepository.findAllWithFilter(pageable,filter).stream().map(ProductResponse::convert).collect(Collectors.toList());
     }
     @Override
     public ProductResponse getOneProduct(Long id) {

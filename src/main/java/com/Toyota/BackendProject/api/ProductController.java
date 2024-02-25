@@ -18,7 +18,7 @@ public class ProductController {
 
     @GetMapping("/getAllProducts")
     public GenericResponse<List<ProductResponse>> getAllProducts(@RequestParam(defaultValue = "0",name = "page")Integer page,
-                                                                 @RequestParam(defaultValue = "0",name = "size") Integer size,
+                                                                 @RequestParam(defaultValue = "2",name = "size") Integer size,
                                                                  @RequestParam(defaultValue = "id",name = "sortBy")String sortBy,
                                                                  @RequestParam(defaultValue = "",name = "filter")String filter){
         final List<ProductResponse>products=productService.getAllProducts(page,size,sortBy,filter);
