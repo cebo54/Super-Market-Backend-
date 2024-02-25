@@ -17,8 +17,11 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/getAllProducts")
-    public GenericResponse<List<ProductResponse>> getAllProducts(Pageable pageable){
-        final List<ProductResponse>products=productService.getAllProducts(pageable);
+    public GenericResponse<List<ProductResponse>> getAllProducts(@RequestParam(defaultValue = "0",name = "page")Integer page,
+                                                                 @RequestParam(defaultValue = "0",name = "size") Integer size,
+                                                                 @RequestParam(defaultValue = "id",name = "sortBy")String sortBy,
+                                                                 @RequestParam(defaultValue = "",name = "filter")String filter){
+        final List<ProductResponse>products=productService.getAllProducts(page,size,sortBy,filter);
         return GenericResponse.successResult(products,"success.message.successful");
     }
 

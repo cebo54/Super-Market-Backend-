@@ -17,7 +17,7 @@ public class SaleController {
     private final SaleService saleService;
 
     @PostMapping("/makesale")
-    public GenericResponse<Object> sale(@RequestBody SaleRequest saleRequest){
+    public GenericResponse<SaleResponse> sale(@RequestBody SaleRequest saleRequest){
         try {
             SaleResponse saleResponse = saleService.sale(saleRequest);
             return GenericResponse.successResult(saleResponse,"success.message.successful");
