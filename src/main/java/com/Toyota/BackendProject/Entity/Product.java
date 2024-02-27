@@ -26,11 +26,10 @@ public class Product {
     @Column(columnDefinition ="VARCHAR(255)",name="barcode")
     private String barcode;
     @Column(name="img")
-    @Lob
     private byte[] img;
     @Column(name="stock",length = 20,nullable = false)
     private int stock;
-    @Column(name="brand",length = 50,nullable = false)
+    @Column(name="brand",length = 50,nullable = true)
     private String brand;
     @Column(name="description",length = 255)
     private String description;

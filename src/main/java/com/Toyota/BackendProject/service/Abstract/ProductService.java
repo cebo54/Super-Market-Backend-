@@ -2,7 +2,9 @@ package com.Toyota.BackendProject.service.Abstract;
 
 import com.Toyota.BackendProject.dto.response.ProductResponse;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ProductService {
@@ -14,5 +16,6 @@ public interface ProductService {
     List<ProductResponse> getProductsByCategoryId(Long id);
     List<ProductResponse> findByKeyword(String keyword);
 
-    void saveImg(byte[] img);
+
+    String addImg(MultipartFile file, Long id) throws IOException;
 }

@@ -34,6 +34,8 @@ public class Sale {
     private double change;
     @Column(name="totalAmount",length = 20,nullable = false)
     private double totalAmount;
+
+
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
     private List<SoldProduct> soldProducts;
 

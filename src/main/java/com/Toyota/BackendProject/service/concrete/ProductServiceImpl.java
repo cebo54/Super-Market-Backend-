@@ -9,7 +9,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,11 +46,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
+
     @Override
-    public void saveImg(byte[] img) {
-        Product product=new Product();
-        product.setImgProp(img);
+    public String addImg(MultipartFile file, Long id) throws IOException {
+        Product product=productRepository.findById(id).orElseThrow();
+        product.setImg(file.getBytes());
         productRepository.save(product);
+        byte[] img= product.getImg();
+        String base64img= Base64.getEncoder().encodeToString(img);
+        return base64img;
     }
 
 

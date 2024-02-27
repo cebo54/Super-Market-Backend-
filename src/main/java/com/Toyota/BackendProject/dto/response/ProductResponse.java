@@ -1,6 +1,7 @@
 package com.Toyota.BackendProject.dto.response;
 
 import com.Toyota.BackendProject.Entity.Product;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,9 +21,12 @@ public class ProductResponse {
     private String brand;
     private String description;
 
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private Date expiration_date;
 
     private String category;
+
+    private byte[] img;
 
     public static ProductResponse convert(Product product){
       return ProductResponse.builder()
@@ -33,6 +37,7 @@ public class ProductResponse {
               .description(product.getDescription())
               .expiration_date(product.getExpiration_date())
               .category(product.getCategory().getName())
+              .img(product.getImg())
               .build();
     }
 

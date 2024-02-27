@@ -29,11 +29,6 @@ public class SaleServiceImpl implements SaleService {
     @Override
     public SaleResponse sale(SaleRequest saleRequest) {
 
-        Sale sale =new Sale();
-        sale.setPaymentDate(LocalDateTime.now());
-        sale.setCashierName(saleRequest.getCashierName());
-        sale.setPaymentType(saleRequest.getPaymentType());
-        sale.setReceivedMoney(saleRequest.getReceivedMoney());
         List<SoldProduct> soldProducts = saleRequest.getSoldProducts().stream()
                 .map(soldProductRequest ->
                 {
@@ -51,14 +46,20 @@ public class SaleServiceImpl implements SaleService {
                     return soldProduct;
                 })
                 .collect(Collectors.toList());
-        sale.setSoldProducts(soldProducts);
         double totalAmount=calculateTotalAmount(soldProducts);
-        if(totalAmount > sale.getReceivedMoney()){
-            logger.info(String.format("your budget is %s less than price",totalAmount-saleRequest.getReceivedMoney()));
-            throw new RuntimeException(String.format("your budget is %s less than price",totalAmount-saleRequest.getReceivedMoney()));
+        if(totalAmount > saleRequest.getReceivedMoney()){
+            logger.info(String.format("your budget is not enough you need %s cash",totalAmount-saleRequest.getReceivedMoney()));
+            throw new RuntimeException(String.format("your budget is not enough you need %s cash",totalAmount-saleRequest.getReceivedMoney()));
         }
-        sale.setTotalAmount(totalAmount);
-        sale.setChange((saleRequest.getReceivedMoney()-totalAmount));
+        Sale sale = Sale.builder()
+                .paymentDate(LocalDateTime.now())
+                .cashierName(saleRequest.getCashierName())
+                .paymentType(saleRequest.getPaymentType())
+                .receivedMoney(saleRequest.getReceivedMoney())
+                .totalAmount(totalAmount)
+                .change(saleRequest.getReceivedMoney()-totalAmount)
+                .soldProducts(soldProducts)
+                .build();
         saleRepository.save(sale);
         for(SoldProduct soldProduct:soldProducts){
             soldProduct.setSale(sale);

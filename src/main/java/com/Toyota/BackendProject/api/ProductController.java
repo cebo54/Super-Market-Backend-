@@ -6,7 +6,9 @@ import com.Toyota.BackendProject.service.Abstract.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -15,6 +17,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+
 
     @GetMapping("/getAllProducts")
     public GenericResponse<List<ProductResponse>> getAllProducts(@RequestParam(defaultValue = "0",name = "page")Integer page,
@@ -36,6 +39,12 @@ public class ProductController {
         List<ProductResponse> products=productService.getProductsByCategoryId(id);
         return GenericResponse.successResult(products,"success.message.successful");
     }
+
+    @PostMapping("/addImg/{id}")
+    public String addImg(@RequestParam("file")MultipartFile file ,@PathVariable("id")Long id) throws IOException {
+        return productService.addImg(file,id);
+    }
+
 
     @GetMapping("/search")
     public GenericResponse<List<ProductResponse>> searchProducts(@RequestParam("keyword") String keyword) {
