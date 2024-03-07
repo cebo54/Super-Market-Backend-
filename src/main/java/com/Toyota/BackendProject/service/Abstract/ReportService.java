@@ -3,6 +3,8 @@ package com.Toyota.BackendProject.service.Abstract;
 import com.Toyota.BackendProject.dto.response.DetailsResponse;
 import com.Toyota.BackendProject.dto.response.ReportResponse;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,4 +16,8 @@ public interface ReportService {
 
 
     DetailsResponse details(LocalDateTime paymentDate);
+
+    void generatePdfOrBase64BySaleId(Long id, OutputStream outputStream) throws IOException;
+
+
 }

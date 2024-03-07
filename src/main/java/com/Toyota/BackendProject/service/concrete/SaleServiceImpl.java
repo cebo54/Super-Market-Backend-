@@ -7,7 +7,6 @@ import com.Toyota.BackendProject.Dao.SoldProductRepository;
 import com.Toyota.BackendProject.Entity.*;
 import com.Toyota.BackendProject.dto.request.SaleRequest;
 import com.Toyota.BackendProject.dto.request.SoldProductRequest;
-import com.Toyota.BackendProject.dto.response.ProductResponse;
 import com.Toyota.BackendProject.dto.response.SaleResponse;
 import com.Toyota.BackendProject.service.Abstract.SaleService;
 import lombok.RequiredArgsConstructor;

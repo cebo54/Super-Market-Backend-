@@ -12,15 +12,14 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SoldProductResponse2 {
 
-    private String name;
-
+    private String productName;
     private int quantity;
 
     private double price;
 
     public static SoldProductResponse2 convert(SoldProduct soldProduct){
         return SoldProductResponse2.builder()
-                .name(soldProduct.getProduct().getName())
+                .productName(soldProduct.getProduct().getName())
                 .quantity(soldProduct.getQuantity())
                 .price(soldProduct.getProduct().getPrice())
                 .build();

@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 @Builder
 public class ReportResponse {
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-    private LocalDateTime date;
-    private Long saleId;
+    private LocalDateTime paymentDate;
+    private Long id;
 
     private String cashierName;
 
@@ -35,8 +35,8 @@ public class ReportResponse {
         List<SoldProductResponse2>soldProducts=sale.getSoldProducts().stream()
                 .map(SoldProductResponse2::convert).collect(Collectors.toList());
         return ReportResponse.builder()
-                .date(sale.getPaymentDate())
-                .saleId(sale.getId())
+                .paymentDate(sale.getPaymentDate())
+                .id(sale.getId())
                 .cashierName(sale.getCashierName())
                 .paymentType(sale.getPaymentType())
                 .soldProducts(soldProducts)
