@@ -39,12 +39,15 @@ public class Product {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="category_id")
     private Category category;
-    @OneToMany(mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
     private List<SoldProduct> SoldProducts;
 
+    @Column(name="is_Active")
+    private boolean isActive;
 
 
     public void setImgProp(byte[] img){
         this.img=img;
     }
+
 }
