@@ -22,7 +22,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/getUsers")
-    public GenericResponse<List<UserViewRequest>> getUsers(@RequestParam(defaultValue = "2",required = false)Integer isActive,
+    public GenericResponse<List<UserViewRequest>> getUsers(@RequestParam(defaultValue = "1",required = false)Integer isActive,
                                                            @RequestParam(defaultValue = "0",name = "page")Integer page,
                                                            @RequestParam(defaultValue = "0",name = "size") Integer size,
                                                            @RequestParam(defaultValue = "id",name = "sortBy")String sortBy,

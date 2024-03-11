@@ -23,7 +23,7 @@ public class Category {
     @Column(name = "description", nullable = false, length = 1000)
     private String description;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "category")
     private List<Product> products;
 
     @OneToMany(mappedBy = "category")

@@ -6,8 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -27,6 +30,7 @@ public class ProductResponse {
     private String category;
 
     private byte[] img;
+    private Boolean isActive;
 
     public static ProductResponse convert(Product product){
       return ProductResponse.builder()
@@ -38,7 +42,11 @@ public class ProductResponse {
               .expiration_date(product.getExpiration_date())
               .category(product.getCategory().getName())
               .img(product.getImg())
+              .isActive(product.isActive())
               .build();
+    }
+    public static List<ProductResponse> convertUserListToUserViewResponse(Page<Product> products){
+        return products.stream().map(ProductResponse::convert).collect(Collectors.toList());
     }
 
 }

@@ -10,8 +10,11 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product,Long> {
-    @Query("select t from Product t where t.name like %:filter%")
-    Page<Product> findAllWithFilter(Pageable pageable,@Param("filter") String filter);
+
+    Page<Product> findByIsActive(Boolean isActive,Pageable pageable);
+
+    @Query("select t from Product t where t.isActive = :isActive and t.name like %:filter%")
+    Page<Product> findByIsActiveWithFilter(@Param("isActive")Boolean isActive, Pageable pageable,@Param("filter") String filter);
 
     List<Product>findAllByCategoryId(Long id);
 
