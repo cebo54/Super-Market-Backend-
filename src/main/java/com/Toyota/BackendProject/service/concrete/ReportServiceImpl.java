@@ -82,7 +82,7 @@ public class ReportServiceImpl implements ReportService {
 
 
     @Transactional
-    public void generatePdfOrBase64BySaleId(Long id, OutputStream outputStream) throws IOException {
+    public void generatePdfBySaleId(Long id, OutputStream outputStream) throws IOException {
         Sale sale = entityManager.find(Sale.class, id);
         if (sale == null) {
             throw new IllegalArgumentException("Sale with ID " + id + " not found.");

@@ -14,7 +14,6 @@ public interface ProductService {
     ProductResponse getOneProduct(Long id);
 
     List<ProductResponse> getProductsByCategoryId(Long id);
-    List<ProductResponse> findByKeyword(String keyword);
 
 
     String addImg(MultipartFile file, Long id) throws IOException;

@@ -20,10 +20,16 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+
     @Override
     public List<ProductResponse> getAllProducts(Integer page,Integer size,String sortBy,String filter) {
         Pageable pageable= PageRequest.of(page,size, Sort.by(sortBy));
-        return productRepository.findAllWithFilter(pageable,filter).stream().map(ProductResponse::convert).collect(Collectors.toList());
+        List<ProductResponse>productResponses=productRepository
+                .findAllWithFilter(pageable,filter)
+                .stream()
+                .map(ProductResponse::convert)
+                .collect(Collectors.toList());
+        return productResponses;
     }
     @Override
     public ProductResponse getOneProduct(Long id) {
@@ -37,14 +43,6 @@ public class ProductServiceImpl implements ProductService {
         List<ProductResponse>pvr=products.stream().map(ProductResponse::convert).collect(Collectors.toList());
         return pvr;
     }
-    @Override
-    public List<ProductResponse> findByKeyword(String keyword) {
-        List<Product> productList = productRepository.findByKeyword(keyword);
-        return productList.stream()
-                .map(ProductResponse::convert)
-                .collect(Collectors.toList());
-    }
-
 
 
     @Override

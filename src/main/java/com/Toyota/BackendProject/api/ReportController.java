@@ -69,7 +69,7 @@ public class ReportController {
      public ResponseEntity<byte[]> generatePdfBySaleId(@PathVariable Long id) {
          ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
          try {
-             reportService.generatePdfOrBase64BySaleId(id, outputStream);
+             reportService.generatePdfBySaleId(id, outputStream);
              byte[] pdfBytes = outputStream.toByteArray();
 
              HttpHeaders headers = new HttpHeaders();

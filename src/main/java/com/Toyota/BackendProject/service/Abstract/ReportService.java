@@ -17,7 +17,7 @@ public interface ReportService {
 
     DetailsResponse details(LocalDateTime paymentDate);
 
-    void generatePdfOrBase64BySaleId(Long id, OutputStream outputStream) throws IOException;
+    void generatePdfBySaleId(Long id, OutputStream outputStream) throws IOException;
 
 
 }

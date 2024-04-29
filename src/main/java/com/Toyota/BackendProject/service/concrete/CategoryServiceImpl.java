@@ -14,19 +14,21 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
+
     private final CategoryRepository categoryRepository;
+
 
     @Override
     public List<CategoryResponse> getAllCategories() {
         List<Category> categories = categoryRepository.findAll();
-        List<CategoryResponse> categoryViewResponses=categories.stream().map(CategoryResponse::convert).collect(Collectors.toList());
+        List<CategoryResponse> categoryViewResponses = categories.stream().map(CategoryResponse::convert).collect(Collectors.toList());
         return categoryViewResponses;
     }
 
     @Override
     public CategoryResponse getOneCategory(Long id) {
-        Category category=categoryRepository.findById(id).orElseThrow(()->new RuntimeException("Category not found"));
-        CategoryResponse cvr= CategoryResponse.convert(category);
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category not found"));
+        CategoryResponse cvr = CategoryResponse.convert(category);
         return cvr;
     }
 

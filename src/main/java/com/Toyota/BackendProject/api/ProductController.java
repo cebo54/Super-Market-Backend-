@@ -46,11 +46,6 @@ public class ProductController {
     }
 
 
-    @GetMapping("/search")
-    public GenericResponse<List<ProductResponse>> searchProducts(@RequestParam("keyword") String keyword) {
-        List<ProductResponse> products = productService.findByKeyword(keyword);
-        return GenericResponse.successResult(products,"success.message.successful");
-    }
 
 
 

@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
         }
         else{
-            throw new RuntimeException("User not found with id "+id);
+            throw new RuntimeException("User not found with id " + id);
         }
     }
 

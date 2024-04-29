@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class SaleServiceImpl implements SaleService {
-    private static final Logger logger = Logger.getLogger(SaleServiceImpl.class);
+    public static final Logger logger = Logger.getLogger(SaleServiceImpl.class);
     private final SaleRepository saleRepository;
     private final SoldProductRepository soldProductRepository;
     private final ProductRepository productRepository;
@@ -97,7 +97,10 @@ public class SaleServiceImpl implements SaleService {
         }
         return totalAmount;
     }
-    private double calculateDiscount(Campaign campaign,double productPrice,int quantity) {
+    public double calculateDiscount(Campaign campaign,double productPrice,int quantity) {
+        if (campaign == null) {
+            throw new IllegalArgumentException("Campaign cannot be null");
+        }
         double discount = 0;
         Long campaignId=campaign.getId();
         if (campaignId != null) {
