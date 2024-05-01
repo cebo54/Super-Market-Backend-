@@ -44,14 +44,13 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Role> roles;
 
-    //user nesnesinin kullanıcılarını döndürür
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
     }
-    //kullanıcının hesabının süresinin dolup dolmadıgını belirir
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -67,7 +66,7 @@ public class User implements UserDetails {
         return true;
     }
 
-    //kullanıcı aktif mi pasif mi
+
     @Override
     public boolean isEnabled() {
 

@@ -81,7 +81,9 @@ public class SaleServiceImpl implements SaleService {
 
             // set updated stock
             product.setStock(updatedStock);
-
+            if(updatedStock==0){
+                product.setActive(false);
+            }
             // save new version of product
             productRepository.save(product);
         }

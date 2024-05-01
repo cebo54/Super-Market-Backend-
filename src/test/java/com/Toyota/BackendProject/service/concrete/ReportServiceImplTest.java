@@ -69,6 +69,7 @@ class ReportServiceImplTest {
                 .expiration_date(null)
                 .category(generateCategory())
                 .img(null)
+                    .isActive(true)
                 .build();
     }
     public List<SoldProduct> generateSoldProduct() {

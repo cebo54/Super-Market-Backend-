@@ -86,13 +86,6 @@ public class ProductServiceImpl implements ProductService {
         List<ProductResponse>pvr=products.stream().map(ProductResponse::convert).collect(Collectors.toList());
         return pvr;
     }
-    @Override
-    public List<ProductResponse> findByKeyword(String keyword) {
-        List<Product> productList = productRepository.findByKeyword(keyword);
-        return productList.stream()
-                .map(ProductResponse::convert)
-                .collect(Collectors.toList());
-    }
 
 
 

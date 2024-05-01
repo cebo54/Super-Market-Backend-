@@ -102,15 +102,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeStatus(Long id) {
-        Optional<User>optionalUser=userRepository.findById(id);
-        if(optionalUser.isPresent()){
-            User user=optionalUser.get();
-            user.setActive(!user.isActive());
-            userRepository.save(user);
-        }
-        else{
-            throw new RuntimeException("User not found with id " + id);
-        }
+        User user=userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found with id " + id));
+        user.setActive(!user.isActive());
+        userRepository.save(user);
     }
 
 

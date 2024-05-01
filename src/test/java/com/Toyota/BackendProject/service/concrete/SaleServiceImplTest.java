@@ -61,6 +61,7 @@ class SaleServiceImplTest {
                 .barcode("barcode")
                 .stock(100)
                 .description("desc")
+                .isActive(true)
                 .build();
 
     }
@@ -91,6 +92,7 @@ class SaleServiceImplTest {
     @Test
     void shouldMakeSaleAndSaveToTheRepository_IfTheBalanceIsSufficient() {
         Product product=generateProduct();
+        product.setStock(5);
         Campaign campaign=generateCampaign();
         SoldProduct soldProduct=generateSoldProduct();
 
@@ -125,7 +127,8 @@ class SaleServiceImplTest {
         assertEquals(50, saleResponse.getChange());
 
         //Testing UpdateStock method
-        assertEquals(95,product.getStock());
+        assertEquals(0,product.getStock());
+
     }
 
     @Test
@@ -150,6 +153,7 @@ class SaleServiceImplTest {
         assertThrows(RuntimeException.class, () -> saleService.sale(saleRequest));
 
     }
+
     @Test
     void testCalculateDiscountForCampaignId_1L(){
         Product product = generateProduct();
