@@ -76,9 +76,18 @@ There are 4 relationships in the database design;
 
 * In my sold products table, I keep the id of the sale, the id of the products sold, and the ID of the applied campaign.in this table, there may be more than one sales, more than one product, more than one applied campaign, so all relationships are set up as one-to-many.
 
+# Security
 
+A role-based authentication and authorization structure has been created using the jwt token to provide access to the relevant endpoints. This structure is provided using the  JJWT library. There are 3 different roles in accessing endpoints:
+   * Admin
+   * Storemanager
+   * Cashier
 
+# Login
 
+When the user wants to log in, he enters the necessary information, the accuracy of this information is checked, and if it is correct, the unique token is generated, the user assigns a request to the endpoints with this token.
+
+**Login Architecture
 
 
 
