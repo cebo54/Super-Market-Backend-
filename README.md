@@ -89,10 +89,14 @@ When the user wants to log in, he enters the necessary information, the accuracy
 
 **Login Architecture
 
+![image](https://github.com/cebo54/ToyotaBackendProject/assets/93757760/37a76028-510b-46d6-8603-a9b21570d5e2)
+
+# The Process of Accessing Endpoints
+
+The user sends a request via the API Gateway.Gateway receives the incoming request and extracts the JWT (JSON Web Token) information in it.The authentication service checks the validity of the incoming JWT with the auth/validate/{token} method. To do this, it verifies the token's signature and looks at the validity period.If the token is valid, the Authentication service returns this "Token is valid." message to the Gateway and the request is allowed to continue.If the token is not valid, the Authentication service sends a 401 Unauthorized response to the Gateway.
 
 
-
-
+![WhatsApp Image 2024-06-18 at 00 48 11](https://github.com/cebo54/ToyotaBackendProject/assets/93757760/829f6da3-9f03-4abc-b788-652293e9831f)
 
 
 
