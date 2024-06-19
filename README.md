@@ -98,9 +98,16 @@ The user sends a request via the API Gateway.Gateway receives the incoming reque
 
 ![WhatsApp Image 2024-06-18 at 00 48 11](https://github.com/cebo54/ToyotaBackendProject/assets/93757760/829f6da3-9f03-4abc-b788-652293e9831f)
 
+# Microservice Architecture
 
+![WhatsApp Image 2024-06-19 at 20 50 03](https://github.com/cebo54/ToyotaBackendProject/assets/93757760/66431f11-e3e9-487a-a025-9f0a48a1dc25)
 
+**Api Gateway
 
+The API Gateway is a central point that meets all requests from the outside world. Gateway redirects incoming requests to the appropriate microservices, performs security verification and provides load balancing.
+When the user sends a request, the API Gateway outputs the JWT (JSON Web Token) content. Gateway contacts the Authentication Service and checks the validity of the JWT. If the token is valid, the request is redirected to the target service, otherwise a 401 Unauthorized response returns.
+
+**Discovery Server
 
 
 
