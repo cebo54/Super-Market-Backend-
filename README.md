@@ -141,8 +141,15 @@ Sales recorded in the database are converted into receipts in PDF format. Users 
 
 # Unit Tests
 
+The testing aspect of this project is crucial for ensuring the reliability and quality of the codebase. Spring Boot offers excellent support for writing and executing tests, simplifying the process of maintaining the codebase and identifying bugs early in the development cycle.
+
+This project leverages popular testing frameworks like JUnit5 and Mockito to create robust and comprehensive tests. These frameworks provide a variety of annotations, assertions, and utilities to facilitate writing and verifying tests
+
+**Test Coverage
+
+The project strives for extensive test coverage to minimize the risk of undetected bugs. Critical areas, including business logic and error handling, are given priority to ensure thorough testing.
+
+![WhatsApp Image 2024-06-11 at 22 44 34](https://github.com/cebo54/ToyotaBackendProject/assets/93757760/03b3a7e3-fa7c-455e-a3c1-2eaef9fdf8df)
 
 
 
-
-  
