@@ -109,9 +109,37 @@ When the user sends a request, the API Gateway outputs the JWT (JSON Web Token) 
 
 **Discovery Server
 
+Discovery Server allows microservices to find each other and communicate. The services register themselves on the Discovery Server and find out the addresses of the other services they need from there.
+
+**Authentication Service
+
+Authentication service is the place where security transactions are performed in it, checking whether the credentials of this user are correct when the user logs in. The token based authentication and authorization structure was created using the JWT library. When the user logs in successfully, a unique token is generated for the user. There is a validity period for this token, and if this period does not expire, requests can be made to the endpoints related to the token. At the same time, it is the place where roles are claimed into the token while providing this control in the role control section in Apigateway.
+
+**Product Service
+
+Product service is a service where categories and campaigns are managed, products can be added and deleted, and products can be listed.There is no need authorization for this service.
+
+**Sale Service
+
+It is the service where the product sale is carried out.Users with the cashier role can make the sale.The sales made are recorded in the database and the reports of the sales can be displayed.
+
+**User Management Service
+
+It is a service where users can be added and registered users can be listed.Users are passively deleted, not deleted from the database.Users with the admin role can perform these operations.
+
+**Report Service
+
+
+Sales recorded in the database are converted into receipts in PDF format. Users with store manager role can view any receipt they wish.
+
+![image](https://github.com/cebo54/ToyotaBackendProject/assets/93757760/51fa4068-0924-4cf3-af48-584851059f3d)
 
 
 
+![image](https://github.com/cebo54/ToyotaBackendProject/assets/93757760/d0bb9ff0-463f-4bfa-ba80-eae45d561d94)
+
+
+# Unit Tests
 
 
 
