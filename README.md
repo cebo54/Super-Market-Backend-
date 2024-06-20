@@ -166,11 +166,18 @@ Docker Hub is a cloud-based repository where Docker users and partners create, t
 Docker Compose is a tool that allows you to define and manage multi-container Docker applications. With Docker Compose, you can configure your application's services, networks, and volumes using a single YAML file, making it easy to start and stop all services with a single command. This simplifies the orchestration of complex applications by automating the setup and management of containers, ensuring that all components work together seamlessly.
 
 In this project, I use Google Jib to automate the creation and pushing of Docker images to Docker Hub. Jib is a Maven and Gradle plugin that builds optimized Docker and OCI images for your Java applications without requiring a Docker daemon. This approach streamlines the CI/CD pipeline by integrating the image build process directly into the Maven or Gradle build lifecycle.
-          - Create images and push to docker hub.
-          `mvn clean compile jib:build`
+          
+          **Create images and push to Docker Hub:
+          ```
+          mvn clean compile jib:build
+          ```
 
-          -Run the application using Docker Compose.
-          `docker-compose up`
+          **Run the application using Docker Compose:
+          ```
+          docker-compose up
+          ```
 
-          -Stop the running application.
-          `docker-compose down`
+          **Stop the running application:
+          ```
+          docker-compose down
+          ```
