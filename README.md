@@ -87,7 +87,7 @@ A role-based authentication and authorization structure has been created using t
 
 When the user wants to log in, he enters the necessary information, the accuracy of this information is checked, and if it is correct, the unique token is generated, the user assigns a request to the endpoints with this token.
 
-**Login Architecture
+### Login Architecture
 
 ![image](https://github.com/cebo54/ToyotaBackendProject/assets/93757760/37a76028-510b-46d6-8603-a9b21570d5e2)
 
@@ -102,32 +102,32 @@ The user sends a request via the API Gateway.Gateway receives the incoming reque
 
 ![WhatsApp Image 2024-06-19 at 20 50 03](https://github.com/cebo54/ToyotaBackendProject/assets/93757760/66431f11-e3e9-487a-a025-9f0a48a1dc25)
 
-**Api Gateway
+### Api Gateway
 
 The API Gateway is a central point that meets all requests from the outside world. Gateway redirects incoming requests to the appropriate microservices, performs security verification and provides load balancing.
 When the user sends a request, the API Gateway outputs the JWT (JSON Web Token) content. Gateway contacts the Authentication Service and checks the validity of the JWT. If the token is valid, the request is redirected to the target service, otherwise a 401 Unauthorized response returns.
 
-**Discovery Server
+### Discovery Server
 
 Discovery Server allows microservices to find each other and communicate. The services register themselves on the Discovery Server and find out the addresses of the other services they need from there.
 
-**Authentication Service
+### Authentication Service
 
 Authentication service is the place where security transactions are performed in it, checking whether the credentials of this user are correct when the user logs in. The token based authentication and authorization structure was created using the JWT library. When the user logs in successfully, a unique token is generated for the user. There is a validity period for this token, and if this period does not expire, requests can be made to the endpoints related to the token. At the same time, it is the place where roles are claimed into the token while providing this control in the role control section in Apigateway.
 
-**Product Service
+### Product Service
 
 Product service is a service where categories and campaigns are managed, products can be added and deleted, and products can be listed.There is no need authorization for this service.
 
-**Sale Service
+### Sale Service
 
 It is the service where the product sale is carried out.Users with the cashier role can make the sale.The sales made are recorded in the database and the reports of the sales can be displayed.
 
-**User Management Service
+### User Management Service
 
 It is a service where users can be added and registered users can be listed.Users are passively deleted, not deleted from the database.Users with the admin role can perform these operations.
 
-**Report Service
+### Report Service
 
 
 Sales recorded in the database are converted into receipts in PDF format. Users with store manager role can view any receipt they wish.
@@ -145,11 +145,32 @@ The testing aspect of this project is crucial for ensuring the reliability and q
 
 This project leverages popular testing frameworks like JUnit5 and Mockito to create robust and comprehensive tests. These frameworks provide a variety of annotations, assertions, and utilities to facilitate writing and verifying tests
 
-**Test Coverage
+### Test Coverage
 
 The project strives for extensive test coverage to minimize the risk of undetected bugs. Critical areas, including business logic and error handling, are given priority to ensure thorough testing.
 
 ![WhatsApp Image 2024-06-11 at 22 44 34](https://github.com/cebo54/ToyotaBackendProject/assets/93757760/03b3a7e3-fa7c-455e-a3c1-2eaef9fdf8df)
 
 
+# Docker
 
+Docker is an open-source platform that provides containerization technology for developing, deploying, and running applications. Containers are isolated environments that ensure applications and their dependencies run consistently across any platform.
+
+# Docker Hub
+
+Docker Hub is a cloud-based repository where Docker users and partners create, test, store, and distribute container images. It provides a centralized resource for container image discovery, distribution, and management. With Docker Hub, you can share container images with your team or the public, access a large library of pre-built images, and automate the build and deployment processes.
+[Click Here](https://hub.docker.com/) if you want to check my Docker Hub repository.
+
+# Docker Compose
+
+Docker Compose is a tool that allows you to define and manage multi-container Docker applications. With Docker Compose, you can configure your application's services, networks, and volumes using a single YAML file, making it easy to start and stop all services with a single command. This simplifies the orchestration of complex applications by automating the setup and management of containers, ensuring that all components work together seamlessly.
+
+In this project, I use Google Jib to automate the creation and pushing of Docker images to Docker Hub. Jib is a Maven and Gradle plugin that builds optimized Docker and OCI images for your Java applications without requiring a Docker daemon. This approach streamlines the CI/CD pipeline by integrating the image build process directly into the Maven or Gradle build lifecycle.
+          - Create images and push to docker hub.
+          `mvn clean compile jib:build`
+
+          -Run the application using Docker Compose.
+          `docker-compose up`
+
+          -Stop the running application.
+          `docker-compose down`
