@@ -32,6 +32,7 @@ public class SaleResponse {
     private double totalAmount;
 
 
+
     public static SaleResponse convert(Sale sale, List<SoldProduct>soldProducts){
         List<SoldProductResponse>soldProductResponses=soldProducts.stream()
                 .map(SoldProductResponse::convert).collect(Collectors.toList());

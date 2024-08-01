@@ -64,6 +64,7 @@ public class SaleServiceImpl implements SaleService {
             logger.info(String.format("your budget is not enough you need %s cash",totalAmount-saleRequest.getReceivedMoney()));
             throw new RuntimeException(String.format("your budget is not enough you need %s cash",totalAmount-saleRequest.getReceivedMoney()));
         }
+
         Sale sale = Sale.builder()
                 .paymentDate(LocalDateTime.now())
                 .cashierName(saleRequest.getCashierName())
@@ -115,6 +116,7 @@ public class SaleServiceImpl implements SaleService {
         }
     }
 
+
     /**
      * Calculates the total amount for the list of sold products, including any applicable discounts.
      *
@@ -130,6 +132,7 @@ public class SaleServiceImpl implements SaleService {
             double discount = calculateDiscount(soldProduct.getCampaign(), productPrice, quantity);
             totalAmount += (productPrice * quantity) - discount;
         }
+
         logger.info("Total amount calculated: " + totalAmount);
 
         return totalAmount;
@@ -151,8 +154,12 @@ public class SaleServiceImpl implements SaleService {
         Long campaignId=campaign.getId();
         if (campaignId != null) {
             if (campaignId==1) {
-                if(quantity==3)
-                    discount =productPrice;
+                if (quantity >= 3) {
+                    int discountQuantity = quantity / 3;
+                    discount = discountQuantity * productPrice;
+                } else {
+                    discount = 0;
+                }
             }
             if (campaignId==2) {
                 discount = productPrice * quantity * 0.25;

@@ -70,7 +70,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                             logger.info("Token validation response: " + response);
                             // Handle Response from Authentication Service
                             if (response == null || !"Token is valid.".equals(response.getMessage())) {
-                                logger.warn(String.format("According to the token-service response, token couldn't be validated. username: %s", jwtUtil.getUsernameFromToken(finalAuthHeader)));
+                                logger.info(String.format("According to the token-service response, token couldn't be validated. username: %s", jwtUtil.getUsernameFromToken(finalAuthHeader)));
                                 return Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED));
                             }
 
@@ -87,7 +87,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                             // user who has any role can access this point.
                             if (path.startsWith("/auth/") || path.startsWith("/product/")) {
                                 if (roles.isEmpty()) {
-                                    logger.fatal(String.format("user: %s does not have role. ", username));
+                                    logger.info(String.format("user: %s does not have role. ", username));
                                     return Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED));
                                 }
 

@@ -7,8 +7,6 @@ import com.Toyota.rapor.dto.response.ReportResponse;
 import com.Toyota.rapor.entity.Sale;
 import com.Toyota.rapor.entity.SoldProduct;
 import com.Toyota.rapor.service.Abstract.ReportService;
-
-
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -30,8 +28,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
-
-
 /**
  * Service implementation for handling report-related operations.
  */
@@ -120,7 +116,7 @@ public class ReportServiceImpl implements ReportService {
     public void generatePdfBySaleId(Long id, OutputStream outputStream) throws IOException {
         Sale sale = entityManager.find(Sale.class, id);
         if (sale == null) {
-            logger.error("Sale with ID " + id + " not found.");
+            logger.info("Sale with ID " + id + " not found.");
             throw new IllegalArgumentException("Sale with ID " + id + " not found.");
         }
 

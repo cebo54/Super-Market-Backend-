@@ -82,7 +82,7 @@ public class UserController {
             logger.info("User updated successfully with ID: " + id);
             return GenericResponse.successResult(user, "success.message.dataUpdate");
         }catch (RuntimeException e){
-            logger.error("Error updating user with ID: " + id, e);
+            logger.warn("Error updating user with ID: " + id, e);
             return GenericResponse.errorResult("success.message.error");
         }
     }
@@ -101,7 +101,7 @@ public class UserController {
             logger.info("User status changed successfully for user with ID: " + id);
             return GenericResponse.success("success.message.status");
         }catch (RuntimeException e){
-            logger.error("Error changing status for user with ID: " + id, e);
+            logger.warn("Error changing status for user with ID: " + id, e);
             return GenericResponse.errorResult("success.message.error");
         }
     }
@@ -121,7 +121,7 @@ public class UserController {
             logger.info("Role: " + roleName + " added successfully to user with ID: " + id);
             return GenericResponse.success("success.message.roleAdd");
         } catch (RuntimeException e) {
-            logger.error("Error adding role: " + roleName + " to user with ID: " + id, e);
+            logger.warn("Error adding role: " + roleName + " to user with ID: " + id, e);
             if ("User already has the role".equals(e.getMessage())) {
                 return GenericResponse.errorResult("success.message.error");
             }
@@ -144,7 +144,7 @@ public class UserController {
             logger.info("Role: " + roleName + " removed successfully from user with ID: " + id);
             return GenericResponse.success("success.message.roleDel");
         }catch (RuntimeException e){
-            logger.error("Error removing role: " + roleName + " from user with ID: " + id, e);
+            logger.warn("Error removing role: " + roleName + " from user with ID: " + id, e);
             return GenericResponse.errorResult(e.getMessage());
         }
     }

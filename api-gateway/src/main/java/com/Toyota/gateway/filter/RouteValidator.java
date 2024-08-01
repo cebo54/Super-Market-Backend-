@@ -13,8 +13,6 @@ public class RouteValidator {
     public static final List<String> openApiEndpoints = List.of(
             "/auth/**",
             "/eureka/**"
-
-
     );
 
     // Predicate to check if the request is for a secured endpoint

@@ -77,7 +77,7 @@ public class ProductController {
     @GetMapping("/getAllProducts")
     public GenericResponse<List<ProductResponse>> getAllProducts(@RequestParam(defaultValue = "1",required = false)Integer isActive,
                                                                  @RequestParam(defaultValue = "0",name = "page")Integer page,
-                                                                 @RequestParam(defaultValue = "2",name = "size") Integer size,
+                                                                 @RequestParam(defaultValue = "10",name = "size") Integer size,
                                                                  @RequestParam(defaultValue = "id",name = "sortBy")String sortBy,
                                                                  @RequestParam(defaultValue = "",name = "filter")String filter){
         logger.info("Received request to listing all products");
@@ -86,7 +86,7 @@ public class ProductController {
             logger.info("Products listed successfully");
             return GenericResponse.successResult(products, "success.message.successful");
         }catch (RuntimeException e) {
-            logger.error("Produts are not listed");
+            logger.warn("Produts are not listed");
             return GenericResponse.errorResult("success.message.error");
         }
     }

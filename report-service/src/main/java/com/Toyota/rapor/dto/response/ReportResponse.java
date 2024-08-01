@@ -25,7 +25,7 @@ public class ReportResponse {
 
     private String paymentType;
 
-    private List<SoldProductResponse2> soldProducts;
+    private List<SoldProductResponse> soldProducts;
 
     private double totalAmount;
     private double receivedMoney;
@@ -33,8 +33,8 @@ public class ReportResponse {
     private double change;
 
     public static ReportResponse convert(Sale sale){
-        List<SoldProductResponse2>soldProducts=sale.getSoldProducts().stream()
-                .map(SoldProductResponse2::convert).collect(Collectors.toList());
+        List<SoldProductResponse>soldProducts=sale.getSoldProducts().stream()
+                .map(SoldProductResponse::convert).collect(Collectors.toList());
         return ReportResponse.builder()
                 .paymentDate(sale.getPaymentDate())
                 .id(sale.getId())

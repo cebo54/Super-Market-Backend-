@@ -37,7 +37,7 @@ public class SaleController {
             logger.info("Sale processed successfully");
             return GenericResponse.successResult(saleResponse,"success.message.successful");
         }catch (RuntimeException e){
-            logger.error("Error processing sale" + e);
+            logger.warn("Error processing sale" + e);
             return GenericResponse.errorResult("success.message.error");
         }
     }

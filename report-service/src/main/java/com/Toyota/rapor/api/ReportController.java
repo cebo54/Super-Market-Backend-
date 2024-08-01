@@ -38,7 +38,7 @@ public class ReportController {
     * */
     @GetMapping("/getReports")
     public GenericResponse<List<ReportResponse>> getReports(@RequestParam(defaultValue = "0",name = "page")Integer page,
-                                                            @RequestParam(defaultValue = "0",name = "size") Integer size,
+                                                            @RequestParam(defaultValue = "10",name = "size") Integer size,
                                                             @RequestParam(defaultValue = "id",name = "sortBy")String sortBy,
                                                             @RequestParam(defaultValue = "",name = "filter")String filter){
         logger.info("Fetching reports with pagination: page=" + page + ", size=" + size + ", sortBy=" + sortBy + ", filter=" + filter);
@@ -59,7 +59,7 @@ public class ReportController {
             logger.info("Fetching report with ID: " + id);
             return GenericResponse.successResult(reportService.getOneReport(id), "success.message.successful");
         }catch (RuntimeException e){
-            logger.error("Error occurred while fetching report with ID: " + id, e);
+            logger.warn("Error occurred while fetching report with ID: " + id, e);
             return GenericResponse.errorResult("success.message.error");
         }
     }
@@ -80,7 +80,7 @@ public class ReportController {
             LocalDate date = LocalDate.parse(paymentDateStr, formatter);
             dateTime=date.atStartOfDay();
         } catch (DateTimeParseException e) {
-            logger.error("Error parsing date string: " + paymentDateStr, e);
+            logger.warn("Error parsing date string: " + paymentDateStr, e);
             return GenericResponse.errorResult("success.message.error");
         }
 
@@ -107,7 +107,7 @@ public class ReportController {
              logger.info("PDF report generated successfully for sale with ID: " + id);
              return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
          } catch (IOException e) {
-             logger.error("Error occurred while generating PDF report for sale with ID: " + id, e);
+             logger.warn("Error occurred while generating PDF report for sale with ID: " + id, e);
              return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
          }
      }
